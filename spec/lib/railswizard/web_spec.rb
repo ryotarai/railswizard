@@ -22,8 +22,8 @@ describe Web do
     end
     it "returns recipes" do
       recipes = [
-        Recipe.new(category: "persistence", name: "ActiveRecord", key: "activerecord"),
-        Recipe.new(category: "testing", name: "Capybara", key: "capybara"),
+        Recipe.new(category: "persistence", name: "ActiveRecord", key: "activerecord", exclusive: "orm"),
+        Recipe.new(category: "testing", name: "Capybara", key: "capybara", exclusive: "acceptance_testing"),
       ]
       web.recipes.should == recipes
     end
