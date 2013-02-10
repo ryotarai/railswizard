@@ -8,7 +8,7 @@ Gem::Specification.new do |gem|
   gem.version       = Railswizard::VERSION
   gem.authors       = ["Ryota Arai"]
   gem.email         = ["ryota.arai@gmail.com"]
-  gem.description   = %q{RailsWizard in CLI}
+  gem.description   = %q{A tool to create a new rails app with RailsWizard(http://railswizard.org) template}
   gem.summary       = %q{A tool to create a new rails app with RailsWizard(http://railswizard.org) template}
   gem.homepage      = "https://github.com/ryotarai/railswizard"
 
