@@ -39,5 +39,18 @@ class Recipes
     option += " -J" if any?{|r|r.exclusive == "javascript_framework"}
     option
   end
+
+  def sort_by_name!
+    @array.sort! {|a, b| a.name <=> b.name}
+  end
+  def sort_by_key!
+    @array.sort! {|a, b| a.key <=> b.key}
+  end
+  def sort_by_category!
+    @array.sort! {|a, b| a.category <=> b.category}
+  end
+  def select_by_category!(category)
+    @array.select! {|r| r.category == category}
+  end
 end
 end
