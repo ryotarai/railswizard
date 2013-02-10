@@ -9,7 +9,7 @@ class Web
 
   def recipes
     doc = Nokogiri::HTML(Faraday.get(INDEX_URL).body)
-    doc.css("ul.recipes li").map do |elm|
+    Recipes.new(doc.css("ul.recipes li").map do |elm|
       recipe = Recipe.new
       recipe.name = elm.css('b').children.first.to_s
       recipe.category = elm.attribute('data-category').value
@@ -18,14 +18,14 @@ class Web
         recipe.exclusive = exclusive.value[1...-1]
       end
       recipe
-    end
+    end)
   end
 
   def template_url(recipes)
     param_body = "authenticity_token=#{authenticity_token}&next_step=Finish"
     recipes.each {|recipe| param_body += "&rails_template[recipes][]=#{recipe.key}"}
     res = Faraday.new.post do |req|
-      req.url "http://railswizard.org/templates"
+      req.url TEMPLATE_URL
       req.body = param_body
     end
     res['location'] + ".rb"

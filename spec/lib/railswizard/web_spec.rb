@@ -21,7 +21,7 @@ describe Web do
       Faraday.should_receive(:get).with(Web::INDEX_URL).and_return(double(body: body))
     end
     it "returns recipes" do
-      recipes = [
+      recipes = Recipes.new [
         Recipe.new(category: "persistence", name: "ActiveRecord", key: "activerecord", exclusive: "orm"),
         Recipe.new(category: "testing", name: "Capybara", key: "capybara", exclusive: "acceptance_testing"),
       ]

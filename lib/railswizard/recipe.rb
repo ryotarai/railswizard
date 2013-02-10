@@ -1,6 +1,7 @@
 require 'railswizard'
 
-class Railswizard::Recipe
+module Railswizard
+class Recipe
   attr_accessor :category
   attr_accessor :name
   attr_accessor :key
@@ -20,4 +21,9 @@ class Railswizard::Recipe
     @exclusive == other.exclusive
   end
 
+  def match_to_given?(given_param)
+    [@name, @key].include? given_param
+  end
+
+end
 end

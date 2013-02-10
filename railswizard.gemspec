@@ -19,4 +19,6 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "faraday"
   gem.add_dependency "nokogiri"
+  gem.add_dependency "thor"
+  gem.add_dependency "terminal-table"
 end
