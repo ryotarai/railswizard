@@ -27,18 +27,24 @@ class Cli < Thor
     end
 
     puts table
+  rescue => err
+    puts "[ERROR] #{err}"
   end
 
   desc "template RECIPE(name or key) [RECIPE ...]", "show template url"
   def template(*given_recipes)
     recipes = Recipes.from_given_recipes(given_recipes)
     puts recipes.template_url
+  rescue => err
+    puts "[ERROR] #{err}"
   end
 
   desc "new APP_NAME RECIPE(name or key) [RECIPE ...]", "create a new rails app"
   def new(app_name, *given_recipes)
     recipes = Recipes.from_given_recipes(given_recipes)
     exec "rails new #{app_name} -m #{recipes.template_url} #{recipes.rails_new_option}"
+  rescue => err
+    puts "[ERROR] #{err}"
   end
 
 end
