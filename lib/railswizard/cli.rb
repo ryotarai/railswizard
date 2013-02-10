@@ -8,6 +8,7 @@ class Cli < Thor
 
   desc "list", "list available recipes"
   method_option :sort, aliases: "-s", type: :string, banner: "(#{SORT_ENUM.join('|')})"
+  method_option :category, aliases: "-c", type: :string
   def list
     raise "Invalid sort param" unless (SORT_ENUM + [nil]).include?(options[:sort])
 
@@ -17,6 +18,7 @@ class Cli < Thor
 
     w = Web.new
     recipes = w.recipes
+    recipes.select_by_category!(options[:category]) if options[:category]
     recipes.sort_by_name! if options[:sort] == 'name'
     recipes.sort_by_key! if options[:sort] == 'key'
     recipes.sort_by_category! if options[:sort] == 'category'
