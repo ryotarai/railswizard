@@ -4,14 +4,23 @@ require 'terminal-table'
 
 module Railswizard
 class Cli < Thor
+  SORT_ENUM = ['name', 'key', 'category']
+
   desc "list", "list available recipes"
+  method_option :sort, aliases: "-s", type: :string, banner: "(#{SORT_ENUM.join('|')})"
   def list
+    raise "Invalid sort param" unless (SORT_ENUM + [nil]).include?(options[:sort])
+
     table = Terminal::Table.new
     table << ["Name", "Key", "Category"]
     table << :separator
 
     w = Web.new
-    w.recipes.each do |recipe|
+    recipes = w.recipes
+    recipes.sort_by_name! if options[:sort] == 'name'
+    recipes.sort_by_key! if options[:sort] == 'key'
+    recipes.sort_by_category! if options[:sort] == 'category'
+    recipes.each do |recipe|
       table << [recipe.name, recipe.key, recipe.category]
     end
 
