@@ -18,7 +18,7 @@ class Recipes
 
   attr_accessor :array
 
-  def_delegators :@array, :each, :select, :any
+  def_delegators :@array, :each, :select, :any?
 
   def initialize(array=[])
     @array = array
